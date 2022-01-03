@@ -16,10 +16,12 @@ class _NewMessageState extends State<NewMessage> {
   TextEditingController _controller = new TextEditingController();
   var _enteredMessage = '';
 
-  _sendMessage() {
+  _sendMessage() async {
     final auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     String uid = user!.uid.call();
+    final userData =
+        await FirebaseFirestore.instance.collection('user').doc(uid).get();
     if (kDebugMode) {
       print(uid);
     }
@@ -32,6 +34,7 @@ class _NewMessageState extends State<NewMessage> {
       'text': _enteredMessage,
       'createdAt': Timestamp.now(),
       'userId': uid,
+      'username': userData['username'],
     });
     _controller.clear();
   }

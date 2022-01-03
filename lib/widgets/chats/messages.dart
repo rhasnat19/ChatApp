@@ -38,7 +38,7 @@ class Messages extends StatelessWidget {
                   padding: const EdgeInsets.all(4.0),
                   child: MessageBubble(
                     message: chatSnapshot.data!.docs[index]['text'],
-                    userName: chatSnapshot.data!.docs[index]['userId'],
+                    userName: chatSnapshot.data!.docs[index]['username'],
                     isMe: chatSnapshot.data!.docs[index]['userId'] ==
                             futureSnapshot.data!.uid()
                         ? true
